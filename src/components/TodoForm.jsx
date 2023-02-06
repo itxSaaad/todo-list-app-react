@@ -24,22 +24,22 @@ const TodoForm = ({ addTodo }) => {
             value={value}
             onChange={(event) => setValue(event.target.value)}
           />
-          <Button variant="outline-primary" type="submit">
+          <Button variant="btn btn-secondary" type="submit">
             Add Task
           </Button>
         </InputGroup>
       </Form>
       {/* Updating The Task */}
       {/* <Stack direction="horizontal" gap={3}>
-          <Form.Control
-            controlId="formTaskInputUpdate"
-            type="text"
-            placeholder="Update your Task.."
-          />
-          <Button variant="success">Update</Button>
-          <div className="vr" />
-          <Button variant="warning">Cancel</Button>
-        </Stack> */}
+        <Form.Control
+          controlId="formTaskInputUpdate"
+          type="text"
+          placeholder="Update your Task.."
+        />
+        <Button variant="btn btn-success">Update</Button>
+        <div className="vr" />
+        <Button variant="btn btn-info">Cancel</Button>
+      </Stack> */}
     </>
   );
 };

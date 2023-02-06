@@ -37,7 +37,9 @@ const TodoList = () => {
         )}
       </Card.Body>
       {/* Displaying Number of Tasks */}
-      <Card.Footer>{todos.length} Tasks Pending</Card.Footer>
+      <Card.Footer className="text-center">
+        {todos.length} Tasks Pending
+      </Card.Footer>
     </Card>
   );
 };

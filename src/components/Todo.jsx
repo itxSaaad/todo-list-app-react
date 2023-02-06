@@ -8,8 +8,18 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 const Todo = ({ todo, index, removeTodo }) => (
-  <ListGroupItem key={index} onClick={() => removeTodo(index)}>
+  <ListGroupItem key={index}>
+    <span>{index + 1}</span>
     {todo}
+    <span>
+      <FontAwesomeIcon icon={faPenToSquare} />
+    </span>
+    <span>
+      <FontAwesomeIcon icon={faCheckCircle} />
+    </span>
+    <span>
+      <FontAwesomeIcon icon={faTrashCan} onClick={() => removeTodo(index)} />
+    </span>
   </ListGroupItem>
 );
 
