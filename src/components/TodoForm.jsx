@@ -1,45 +1,49 @@
 import React, { useState } from "react";
-import { Button, Card, Form, InputGroup, Stack } from "react-bootstrap";
-import Todo from "./Todo";
+import { Button, Form, InputGroup } from "react-bootstrap";
 
-const TodoForm = ({ addTodo }) => {
-  const [value, setValue] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!value) return;
-    addTodo(value);
-    setValue("");
-  };
-
+const TodoForm = ({
+  update,
+  value,
+  setValue,
+  handleSubmit,
+  handleSubmitUpdate,
+  setUpdatedValue,
+}) => {
   return (
     <>
-      {/* Adding Tasks */}
-      <Form onSubmit={handleSubmit}>
-        <InputGroup>
-          <Form.Control
-            controlId="formTaskInput"
-            type="text"
-            placeholder="Write your Task Here.."
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          />
-          <Button variant="btn btn-secondary" type="submit">
-            Add Task
-          </Button>
-        </InputGroup>
-      </Form>
-      {/* Updating The Task */}
-      {/* <Stack direction="horizontal" gap={3}>
-        <Form.Control
-          controlId="formTaskInputUpdate"
-          type="text"
-          placeholder="Update your Task.."
-        />
-        <Button variant="btn btn-success">Update</Button>
-        <div className="vr" />
-        <Button variant="btn btn-info">Cancel</Button>
-      </Stack> */}
+      {update ? (
+        // Updating Forms
+        <Form onSubmit={handleSubmitUpdate}>
+          <InputGroup>
+            <Form.Control
+              controlid="formTaskInputUpdate"
+              type="text"
+              placeholder="Update your Task.."
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+            />
+            <Button variant="btn btn-success" type="submit">
+              Update
+            </Button>
+            <Button variant="btn btn-info">Cancel</Button>
+          </InputGroup>
+        </Form>
+      ) : (
+        /* Adding Tasks */ <Form onSubmit={handleSubmit}>
+          <InputGroup>
+            <Form.Control
+              controlid="formTaskInput"
+              type="text"
+              placeholder="Write your Task Here.."
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+            />
+            <Button variant="btn btn-secondary" type="submit">
+              Add Task
+            </Button>
+          </InputGroup>
+        </Form>
+      )}
     </>
   );
 };

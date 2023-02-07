@@ -7,20 +7,52 @@ import {
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Todo = ({ todo, index, removeTodo }) => (
-  <ListGroupItem key={index}>
-    <span>{index + 1}</span>
-    {todo}
-    <span>
-      <FontAwesomeIcon icon={faPenToSquare} />
-    </span>
-    <span>
-      <FontAwesomeIcon icon={faCheckCircle} />
-    </span>
-    <span>
-      <FontAwesomeIcon icon={faTrashCan} onClick={() => removeTodo(index)} />
-    </span>
-  </ListGroupItem>
-);
+const Todo = ({ todo, index, markDone, updateTodo, removeTodo }) => {
+  return (
+    <ListGroupItem key={index}>
+      <div className="position-relative text-start">
+        <div className="d-flex align-items-center ">
+          <span
+            style={{ width: "20px", height: "20px", marginRight: "0.5rem" }}
+            className="d-flex text-center align-items-center justify-content-center square border border-secondary rounded-circle"
+          >
+            {index + 1}
+          </span>
+          <span className="d-flex">{todo.text}</span>
+        </div>
+
+        <div className="position-absolute top-50 translate-middle-y end-0 d-inline-block w-auto">
+          <span
+            title="Edit"
+            className="d-inline-block btn btn-sm btn-secondary"
+            onClick={() => {
+              updateTodo(index);
+            }}
+          >
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </span>
+          <span
+            title="Completed / Not Completed"
+            className="d-inline-block mx-1 btn btn-sm btn-secondary"
+            onClick={() => {
+              markDone(index);
+            }}
+          >
+            <FontAwesomeIcon icon={faCheckCircle} />
+          </span>
+          <span
+            title="Delete"
+            className="d-inline-block  btn btn-sm btn-secondary"
+          >
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              onClick={() => removeTodo(index)}
+            />
+          </span>
+        </div>
+      </div>
+    </ListGroupItem>
+  );
+};
 
 export default Todo;

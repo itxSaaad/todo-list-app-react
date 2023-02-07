@@ -6,8 +6,20 @@ import { ListGroup, Card } from "react-bootstrap";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
-  const addTodo = (todo) => {
-    setTodos([...todos, todo]);
+  const [value, setValue] = useState("");
+  const [updatedValue, setUpdatedValue] = useState("");
+
+  const [update, setUpdate] = useState(false);
+
+  const addTodo = (value) => {
+    setTodos([...todos, { text: value, completed: false }]);
+  };
+
+  const updateTodo = (index) => {
+    setUpdate(true);
+    {
+      /* Update Functionality to be Added*/
+    }
   };
 
   const removeTodo = (index) => {
@@ -15,14 +27,40 @@ const TodoList = () => {
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
+
+  const markDone = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = true;
+    setTodos(newTodos);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!value) return;
+    addTodo(value);
+    setValue("");
+  };
+
+  const handleSubmitUpdate = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Card>
       <Card.Header>
-        <TodoForm addTodo={addTodo} />
+        <TodoForm
+          update={update}
+          value={value}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          handleSubmitUpdate={handleSubmitUpdate}
+        />
       </Card.Header>
       <Card.Body>
         {todos.length === 0 ? (
-          <p>No Tasks Added Yet...</p>
+          <Card className="text-center">
+            <Card.Body>No Tasks Added Yet...</Card.Body>
+          </Card>
         ) : (
           <ListGroup>
             {todos.map((todo, index) => (
@@ -31,6 +69,8 @@ const TodoList = () => {
                 todo={todo}
                 index={index}
                 removeTodo={removeTodo}
+                updateTodo={updateTodo}
+                markDone={markDone}
               />
             ))}
           </ListGroup>
