@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 const TodoForm = ({
   update,
   value,
+  updateValue,
+  setUpdateValue,
   setValue,
+  setUpdate,
   handleSubmit,
   handleSubmitUpdate,
-  setUpdatedValue,
 }) => {
   return (
     <>
@@ -19,13 +21,26 @@ const TodoForm = ({
               controlid="formTaskInputUpdate"
               type="text"
               placeholder="Update your Task.."
-              value={value}
-              onChange={(event) => setValue(event.target.value)}
+              value={updateValue}
+              onChange={(event) => setUpdateValue(event.target.value)}
             />
-            <Button variant="btn btn-success" type="submit">
+            <Button
+              variant="btn btn-success"
+              type="submit"
+              onClick={() => {
+                setUpdate(false);
+              }}
+            >
               Update
             </Button>
-            <Button variant="btn btn-info">Cancel</Button>
+            <Button
+              variant="btn btn-info"
+              onClick={() => {
+                setUpdate(false);
+              }}
+            >
+              Cancel
+            </Button>
           </InputGroup>
         </Form>
       ) : (

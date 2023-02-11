@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ListGroupItem } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,18 +7,29 @@ import {
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Todo = ({ todo, index, markDone, updateTodo, removeTodo }) => {
+const Todo = ({ todo, index, markDone, update, setUpdate, removeTodo }) => {
+  const [textDecoration, setTextDecoration] = useState(false);
+
   return (
-    <ListGroupItem key={index}>
+    <ListGroupItem
+      key={index}
+      className={`${textDecoration ? "bg-success" : ""}`}
+    >
       <div className="position-relative text-start">
-        <div className="d-flex align-items-center ">
+        <div
+          className={`${
+            textDecoration
+              ? "text-decoration-line-through text-muted fw-bolder fst-italic d-flex align-items-center"
+              : "d-flex align-items-center"
+          }`}
+        >
           <span
             style={{ width: "20px", height: "20px", marginRight: "0.5rem" }}
             className="d-flex text-center align-items-center justify-content-center square border border-secondary rounded-circle"
           >
             {index + 1}
           </span>
-          <span className="d-flex">{todo.text}</span>
+          <span className="d-flex text-wrap">{todo.text}</span>
         </div>
 
         <div className="position-absolute top-50 translate-middle-y end-0 d-inline-block w-auto">
@@ -26,7 +37,7 @@ const Todo = ({ todo, index, markDone, updateTodo, removeTodo }) => {
             title="Edit"
             className="d-inline-block btn btn-sm btn-secondary"
             onClick={() => {
-              updateTodo(index);
+              setUpdate(true);
             }}
           >
             <FontAwesomeIcon icon={faPenToSquare} />
@@ -36,6 +47,7 @@ const Todo = ({ todo, index, markDone, updateTodo, removeTodo }) => {
             className="d-inline-block mx-1 btn btn-sm btn-secondary"
             onClick={() => {
               markDone(index);
+              setTextDecoration((prevTextDecoration) => !prevTextDecoration);
             }}
           >
             <FontAwesomeIcon icon={faCheckCircle} />
@@ -43,11 +55,9 @@ const Todo = ({ todo, index, markDone, updateTodo, removeTodo }) => {
           <span
             title="Delete"
             className="d-inline-block  btn btn-sm btn-secondary"
+            onClick={() => removeTodo(index)}
           >
-            <FontAwesomeIcon
-              icon={faTrashCan}
-              onClick={() => removeTodo(index)}
-            />
+            <FontAwesomeIcon icon={faTrashCan} />
           </span>
         </div>
       </div>

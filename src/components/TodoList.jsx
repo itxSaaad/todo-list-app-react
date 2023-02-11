@@ -7,7 +7,7 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   const [value, setValue] = useState("");
-  const [updatedValue, setUpdatedValue] = useState("");
+  const [updateValue, setUpdateValue] = useState("");
 
   const [update, setUpdate] = useState(false);
 
@@ -16,10 +16,7 @@ const TodoList = () => {
   };
 
   const updateTodo = (index) => {
-    setUpdate(true);
-    {
-      /* Update Functionality to be Added*/
-    }
+    // Updating Todo Functionality To be Added
   };
 
   const removeTodo = (index) => {
@@ -43,6 +40,9 @@ const TodoList = () => {
 
   const handleSubmitUpdate = (event) => {
     event.preventDefault();
+    if (!updateValue) return;
+    updateTodo();
+    setUpdateValue("");
   };
 
   return (
@@ -50,7 +50,10 @@ const TodoList = () => {
       <Card.Header>
         <TodoForm
           update={update}
+          updateValue={updateValue}
           value={value}
+          setUpdate={setUpdate}
+          setUpdateValue={setUpdateValue}
           setValue={setValue}
           handleSubmit={handleSubmit}
           handleSubmitUpdate={handleSubmitUpdate}
@@ -68,8 +71,9 @@ const TodoList = () => {
                 key={index}
                 todo={todo}
                 index={index}
+                update={update}
                 removeTodo={removeTodo}
-                updateTodo={updateTodo}
+                setUpdate={setUpdate}
                 markDone={markDone}
               />
             ))}
