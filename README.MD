@@ -4,8 +4,8 @@
 
 ## Live Preview Project
 
-- Click Production Link Below
-  [Todo List]()
+- Click Production Link:
+  [Todo List](https://todo-list-app-react-itxsaaad.vercel.app/)
 
 ## Tech Stack
 

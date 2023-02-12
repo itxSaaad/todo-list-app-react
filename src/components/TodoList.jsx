@@ -7,16 +7,21 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   const [value, setValue] = useState("");
-  const [updateValue, setUpdateValue] = useState("");
+  const [updateValue, setUpdateValue] = useState(
+    todos.filter((todo) => todo.text)
+  );
 
   const [update, setUpdate] = useState(false);
 
   const addTodo = (value) => {
-    setTodos([...todos, { text: value, completed: false }]);
+    const newTodos = [...todos, { text: value, completed: false }];
+    setTodos(newTodos);
   };
 
-  const updateTodo = (index) => {
-    // Updating Todo Functionality To be Added
+  const updateTodo = (index, text) => {
+    const newTodos = [...todos];
+    newTodos[index].text = text;
+    setTodos(newTodos);
   };
 
   const removeTodo = (index) => {
@@ -31,22 +36,9 @@ const TodoList = () => {
     setTodos(newTodos);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!value) return;
-    addTodo(value);
-    setValue("");
-  };
-
-  const handleSubmitUpdate = (event) => {
-    event.preventDefault();
-    if (!updateValue) return;
-    updateTodo();
-    setUpdateValue("");
-  };
-
   return (
     <Card>
+      {/* Adding Tasks */}
       <Card.Header>
         <TodoForm
           update={update}
@@ -55,10 +47,12 @@ const TodoList = () => {
           setUpdate={setUpdate}
           setUpdateValue={setUpdateValue}
           setValue={setValue}
-          handleSubmit={handleSubmit}
-          handleSubmitUpdate={handleSubmitUpdate}
+          addTodo={addTodo}
+          updateTodo={updateTodo}
         />
       </Card.Header>
+
+      {/* Displaying Tasks */}
       <Card.Body>
         {todos.length === 0 ? (
           <Card className="text-center">
@@ -80,9 +74,10 @@ const TodoList = () => {
           </ListGroup>
         )}
       </Card.Body>
+
       {/* Displaying Number of Tasks */}
       <Card.Footer className="text-center">
-        {todos.length} Tasks Pending
+        {todos.filter((todo) => !todo.completed).length} Tasks Pending
       </Card.Footer>
     </Card>
   );

@@ -8,14 +8,28 @@ const TodoForm = ({
   setUpdateValue,
   setValue,
   setUpdate,
-  handleSubmit,
-  handleSubmitUpdate,
+  addTodo,
+  updateTodo,
 }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!value) return;
+    addTodo(value);
+    setValue("");
+  };
+
+  const handleSubmitUpdate = () => {
+    if (!updateValue) return;
+    updateTodo(index, updateValue);
+    setUpdateValue("");
+    setUpdate(false);
+  };
+
   return (
     <>
       {update ? (
         // Updating Forms
-        <Form onSubmit={handleSubmitUpdate}>
+        <Form>
           <InputGroup>
             <Form.Control
               controlid="formTaskInputUpdate"
@@ -27,9 +41,7 @@ const TodoForm = ({
             <Button
               variant="btn btn-success"
               type="submit"
-              onClick={() => {
-                setUpdate(false);
-              }}
+              onClick={handleSubmitUpdate}
             >
               Update
             </Button>
@@ -44,7 +56,8 @@ const TodoForm = ({
           </InputGroup>
         </Form>
       ) : (
-        /* Adding Tasks */ <Form onSubmit={handleSubmit}>
+        /* Adding Tasks */
+        <Form onSubmit={handleSubmit}>
           <InputGroup>
             <Form.Control
               controlid="formTaskInput"
