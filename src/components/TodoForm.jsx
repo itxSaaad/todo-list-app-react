@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import React from 'react';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 const TodoForm = ({
   update,
@@ -8,6 +8,7 @@ const TodoForm = ({
   setUpdateValue,
   setValue,
   setUpdate,
+  updateIndex,
   addTodo,
   updateTodo,
 }) => {
@@ -15,13 +16,14 @@ const TodoForm = ({
     event.preventDefault();
     if (!value) return;
     addTodo(value);
-    setValue("");
+    setValue('');
   };
 
-  const handleSubmitUpdate = () => {
-    if (!updateValue) return;
-    updateTodo(index, updateValue);
-    setUpdateValue("");
+  const handleSubmitUpdate = (event) => {
+    event.preventDefault();
+    if (!updateValue && !updateIndex) return;
+    updateTodo(updateIndex, updateValue);
+    setUpdateValue('');
     setUpdate(false);
   };
 
@@ -29,7 +31,7 @@ const TodoForm = ({
     <>
       {update ? (
         // Updating Forms
-        <Form>
+        <Form onSubmit={handleSubmitUpdate}>
           <InputGroup>
             <Form.Control
               controlid="formTaskInputUpdate"
@@ -41,7 +43,7 @@ const TodoForm = ({
             <Button
               variant="btn btn-success"
               type="submit"
-              onClick={handleSubmitUpdate}
+              // onClick={handleSubmitUpdate}
             >
               Update
             </Button>

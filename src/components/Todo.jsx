@@ -1,30 +1,38 @@
-import React, { useState } from "react";
-import { ListGroupItem } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import { ListGroupItem } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPenToSquare,
   faCheckCircle,
   faTrashCan,
-} from "@fortawesome/free-regular-svg-icons";
+} from '@fortawesome/free-regular-svg-icons';
 
-const Todo = ({ todo, index, markDone, update, setUpdate, removeTodo }) => {
+const Todo = ({
+  todo,
+  index,
+  markDone,
+  update,
+  setUpdate,
+  removeTodo,
+  setUpdateIndex,
+}) => {
   const [textDecoration, setTextDecoration] = useState(false);
 
   return (
     <ListGroupItem
       key={index}
-      className={`${textDecoration ? "bg-success" : ""}`}
+      className={`${textDecoration ? 'bg-success' : ''}`}
     >
       <div className="position-relative text-start">
         <div
           className={`${
             textDecoration
-              ? "text-decoration-line-through text-muted fw-bolder fst-italic d-flex align-items-center"
-              : "d-flex align-items-center"
+              ? 'text-decoration-line-through text-muted fw-bolder fst-italic d-flex align-items-center'
+              : 'd-flex align-items-center'
           }`}
         >
           <span
-            style={{ width: "20px", height: "20px", marginRight: "0.5rem" }}
+            style={{ width: '20px', height: '20px', marginRight: '0.5rem' }}
             className="d-flex text-center align-items-center justify-content-center square border border-secondary rounded-circle"
           >
             {index + 1}
@@ -38,6 +46,7 @@ const Todo = ({ todo, index, markDone, update, setUpdate, removeTodo }) => {
             className="d-inline-block btn btn-sm btn-secondary"
             onClick={() => {
               setUpdate(true);
+              setUpdateIndex(index);
             }}
           >
             <FontAwesomeIcon icon={faPenToSquare} />
