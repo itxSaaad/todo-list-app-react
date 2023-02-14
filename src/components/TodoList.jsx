@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import TodoForm from "./TodoForm";
-import Todo from "./Todo";
-import { ListGroup, Card } from "react-bootstrap";
+import React, { useState } from 'react';
+import TodoForm from './TodoForm';
+import Todo from './Todo';
+import { ListGroup, Card } from 'react-bootstrap';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [updateValue, setUpdateValue] = useState(
     todos.filter((todo) => todo.text)
   );
 
   const [update, setUpdate] = useState(false);
+  const [updateIndex, setUpdateIndex] = useState(null);
 
   const addTodo = (value) => {
     const newTodos = [...todos, { text: value, completed: false }];
@@ -44,6 +45,7 @@ const TodoList = () => {
           update={update}
           updateValue={updateValue}
           value={value}
+          updateIndex={updateIndex}
           setUpdate={setUpdate}
           setUpdateValue={setUpdateValue}
           setValue={setValue}
@@ -66,6 +68,7 @@ const TodoList = () => {
                 todo={todo}
                 index={index}
                 update={update}
+                setUpdateIndex={setUpdateIndex}
                 removeTodo={removeTodo}
                 setUpdate={setUpdate}
                 markDone={markDone}
