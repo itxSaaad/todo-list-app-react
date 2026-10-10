@@ -1,5 +1,16 @@
 # Todo List App in React
 
+## Architecture
+
+```mermaid
+flowchart LR
+  User -->|add, edit, complete, and remove tasks| UI[React application\nVercel deployment]
+  UI --> Components[Todo list and form components]
+  Components --> State[React state and hooks]
+  State --> Components
+  Components --> Browser[Rendered browser UI]
+```
+
 > A simple Todo List app built with React that allows users to create, update, mark as done, and delete todo items.
 
 ## Live Preview Project
@@ -58,3 +69,7 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 Give ⭐️ if you like this project!
 
 <a href="https://www.buymeacoffee.com/itxSaaad"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200" /></a>
+
+## Vercel Deployment
+Vite SPA served from the repository root; client-side routes rewrite to index.html.
+See the repository-root [vercel.json](./vercel.json) for build roots and routing. Configure private values in Vercel Project Settings; never commit secrets.
